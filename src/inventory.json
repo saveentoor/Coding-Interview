@@ -4,49 +4,49 @@
         "name": "twix",
         "price": 1.0,
         "quanity": 10,
-        "max-quanity": 10
+        "maxQuanity": 10
       },
       "a2": {
         "name": "reese",
         "price": 2.0,
         "quanity": 0,
-        "max-quanity": 10
+        "maxQuanity": 10
       },
       "a3": {
         "name": "snickers",
         "price": 1.5,
         "quanity": 10,
-        "max-quanity": 10
+        "maxQuanity": 10
       },
       "a4": {
         "name": "mars",
         "price": 1.0,
         "quanity": 10,
-        "max-quanity": 10
+        "maxQuanity": 10
       },
       "a5": {
         "name": "o'henry",
         "price": 2.0,
         "quanity": 10,
-        "max-quanity": 10
+        "maxQuanity": 10
       },
       "a6": {
         "name": "cookies",
         "price": 1.5,
         "quanity": 10,
-        "max-quanity": 10
+        "maxQuanity": 10
       },
       "a7": {
         "name": "chips",
         "price": 1.5,
         "quanity": 10,
-        "max-quanity": 10
+        "maxQuanity": 10
       },
       "a8": {
         "name": "pop",
         "price": 1.5,
         "quanity": 10,
-        "max-quanity": 10
+        "maxQuanity": 10
       }
     },
   "change":{

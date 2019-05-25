@@ -2,12 +2,21 @@ const vendingMachine = require("../src/vending-machine");
 const inventory = new vendingMachine("./inventory");
 
 describe("Vending Machine", () => {
-  //   describe("The current inventory in the vending machine", () => {
-  //     it("Should give total number of current items in vending machine", () => {
-  //       const result = inventory.currentInventory();
-  //       expect(result).toEqual(["twix", 10]);
-  //     });
-  //   });
+  describe("The current inventory in the vending machine", () => {
+    it("Should give total number of current items in vending machine", () => {
+      const result = inventory.currentInventory();
+      expect(result).toEqual([
+        "twix: 10",
+        "reese: 0",
+        "snickers: 10",
+        "mars: 10",
+        "o'henry: 10",
+        "cookies: 10",
+        "chips: 10",
+        "pop: 10"
+      ]);
+    });
+  });
 
   describe("Purchasing an item that does not exist", () => {
     it("should return a message that says item does not exist", () => {
@@ -38,10 +47,55 @@ describe("Vending Machine", () => {
     });
   });
 
-  // describe("If purchasing an item and put in too much money", () => {
-  //     it("should return name of the item and the extra money" , () =>{
-  //         const result = inventory.purchaseAnItem();
-  //         expect(result).toEqual("");
-  //     })
-  // })
+  describe("If purchasing an item and put in too much money", () => {
+    it("should return name of the item and the extra money", () => {
+      const result = inventory.purchaseAnItem("a6", 2);
+      expect(result).toEqual({ name: "cookies", change: undefined });
+    });
+  });
+
+  describe("If purchasing an item with exact change", () => {
+    it("should the item and no change back", () => {
+      const result = inventory.purchaseAnItem("a7", 1.5);
+      expect(result).toEqual({ name: "chips", change: 0 });
+    });
+  });
+
+  describe("When refilling the inventory", () => {
+    it("should return a list of items of the inventory", () => {
+      const result = inventory.refillInventory();
+      expect(result).toEqual([
+        "twix: 10",
+        "reese: 10",
+        "snickers: 10",
+        "mars: 10",
+        "o'henry: 10",
+        "cookies: 10",
+        "chips: 10",
+        "pop: 10"
+      ]);
+    });
+  });
+
+  describe("When displaying the current change in the vending machine", () => {
+    it("should return a list of the current change in the vending machine", () => {
+      const result = inventory.displayCurrentChange();
+      expect(result).toEqual([
+        ["QUARTERS", 33],
+        ["LOONIES", 40.0],
+        ["TOONIES", 50.0]
+      ]);
+    });
+  });
+
+  describe("When resupplying the change in the vending machine", () => {
+    it("should return a list of the change in the vending machine", () => {
+      const result = inventory.reSupplyChange();
+      expect(result).toEqual([
+        ["QUARTERS", 50.0],
+        ["LOONIES", 60.0],
+        ["TOONIES", 100.0]
+      ]);
+    });
+  });
 });

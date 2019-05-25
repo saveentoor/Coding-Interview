@@ -14,36 +14,85 @@ class VendingMachine {
     });
     return inv;
   }
-
+  getProduct() {
+    return this.product;
+  }
+  //function for streact goal
   calulatingChange(change, price, cost) {
     let amountOwned = cost - price;
     if (amountOwned === 0) {
       return 0;
     }
+    const valueOfCoin = [
+      { name: "TOONIES", value: 2.0 },
+      { name: "LOONIES", value: 1.0 },
+      { name: "QUARTERS", value: 0.25 }
+    ];
+    const changeReturned = change.reduce((received, currency) => {
+      received[currency[0]] = currency[1]; //compare value received to current value
+      return received;
+    }, {});
+    const amountOfCoin = valueOfCoin.reduce((received, currency) => {
+      let amount = 0;
+
+      while (currency.value <= amountOwned && amountOwned !== 0) {
+        amountOwned -= currency.value;
+        changeReturned[currency.name] -= currency.value;
+        amount++;
+      }
+      if (amount > 0) {
+        received.push([currency.name, amount]);
+      }
+      return received;
+    }, []);
+    change.forEach(asset => {
+      asset[1] = changeReturned[asset[0]];
+      return amountOfCoin;
+    });
   }
-  getProduct() {
-    return this.product;
+
+  refillInventory() {
+    const refillInventory = [];
+    const allInventory = Object.keys(this.product);
+
+    allInventory.forEach(item => {
+      this.product[item].quanity = this.product[item].maxQuanity;
+      refillInventory.push(
+        `${this.product[item].name}: ${this.product[item].quanity}`
+      );
+    });
+    return refillInventory;
   }
+
+  reSupplyChange() {
+    this.change.max.forEach((type, amount) => {
+      this.change.current[amount] = type;
+    });
+    return this.change.current;
+  }
+
+  displayCurrentChange() {
+    return this.change.current;
+  }
+
   purchaseAnItem(item, cost) {
     if (!this.product[item]) {
-      //type in wrong id
       return "Item does not exist";
     } else if (this.product[item].quanity === 0) {
-      //if product quantity is 0 (out of stock)
+      //if product quant. is 0
       return "Please select another item";
     } else if (!cost) {
-      //do not put in enough money
-      return `Please put in ${this.product[item].price}`; //please put in money
-      // name: this.product[item].name //and name of item
+      return `Please put in ${this.product[item].price}`; //plz put in change
     } else if (this.product[item].price - cost > 0) {
-      //if you put in too much money
-      const change = this.product[item].price - cost;
+      //put in too much money
+      const money = this.product[item].price - cost;
       return {
         name: this.product[item].name,
-        change: change
+        change: money
       };
     }
-    this.product[item].quanity--; //subtracts 1 from quanity count everytime purchased
+    this.product[item].quanity--; //subtracts 1 from quanity count
+
     return {
       name: this.product[item].name,
       change: this.calulatingChange(
@@ -54,5 +103,5 @@ class VendingMachine {
     };
   }
 }
-module.exports = VendingMachine;
 
+module.exports = VendingMachine;
