@@ -47,6 +47,18 @@
         "price": 1.5,
         "quanity": 10,
         "maxQuanity": 10
+      },
+      "a9": {
+        "name": "",
+        "price": 1.5,
+        "quanity": 10,
+        "maxQuanity": 10
+      },
+      "a10": {
+        "name": "gum",
+        "price": "",
+        "quanity": 10,
+        "maxQuanity": 10
       }
     },
   "change":{

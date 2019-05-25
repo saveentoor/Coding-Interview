@@ -90,7 +90,12 @@ class VendingMachine {
         name: this.product[item].name,
         change: money
       };
+    } else if (!this.product[item].name) {
+      return "Not available";
+    } else if (!this.product[item].price) {
+      return "Not available";
     }
+
     this.product[item].quanity--; //subtracts 1 from quanity count
 
     return {

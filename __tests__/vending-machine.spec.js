@@ -13,7 +13,9 @@ describe("Vending Machine", () => {
         "o'henry: 10",
         "cookies: 10",
         "chips: 10",
-        "pop: 10"
+        "pop: 10",
+        ": 10",
+        "gum: 10"
       ]);
     });
   });
@@ -61,6 +63,13 @@ describe("Vending Machine", () => {
     });
   });
 
+  describe("When making a purcahse and not putting in enough money", () => {
+    it("should return the name of the item and the remaining change", () => {
+      const result = inventory.purchaseAnItem("a8", 1);
+      expect(result).toEqual({ name: "pop", change: 0.5 });
+    });
+  });
+
   describe("When refilling the inventory", () => {
     it("should return a list of items of the inventory", () => {
       const result = inventory.refillInventory();
@@ -72,7 +81,9 @@ describe("Vending Machine", () => {
         "o'henry: 10",
         "cookies: 10",
         "chips: 10",
-        "pop: 10"
+        "pop: 10",
+        ": 10",
+        "gum: 10"
       ]);
     });
   });
@@ -96,6 +107,20 @@ describe("Vending Machine", () => {
         ["LOONIES", 60.0],
         ["TOONIES", 100.0]
       ]);
+    });
+  });
+
+  describe("When making a purcahse that does not have a name", () => {
+    it("should return a error message saying item is not available", () => {
+      const result = inventory.purchaseAnItem("a9", 1.5);
+      expect(result).toEqual("Not available");
+    });
+  });
+
+  describe("When making a purcahse that does not have a price", () => {
+    it("should return a error message saying item is not available", () => {
+      const result = inventory.purchaseAnItem("a10", 1.5);
+      expect(result).toEqual("Not available");
     });
   });
 });
